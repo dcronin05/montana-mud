@@ -13,13 +13,14 @@ class CmdEnterTrain(Command):
     """
 
     key = "enter train"
+    locks = "cmd:not cmdinside()"
 
     def func(self):
         train = self.obj
         self.caller.msg("You get on the train.")
         self.caller.move_to(train, move_type="board")
 
-class CmdLeaveTrain(Command):
+class CmdExitTrain(Command):
     """
     exiting the train
 
@@ -32,6 +33,7 @@ class CmdLeaveTrain(Command):
     """
 
     key = "exit train"
+    locks = "cmd:cmdinside()"
 
     def func(self):
         train = self.obj
@@ -43,4 +45,4 @@ class TrainCmdSet(CmdSet):
 
     def at_cmdset_creation(self):
         self.add(CmdEnterTrain())
-        self.add(CmdLeaveTrain())
+        self.add(CmdExitTrain())
