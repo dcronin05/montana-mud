@@ -1,5 +1,3 @@
-# in a new file mygame/commands/mechcommands.py
-
 from evennia import Command
 
 class CmdFire(Command):
@@ -65,3 +63,17 @@ class CmdLaunch(Command):
                 f"BOOOM! The mech launches missiles at {target.key} which explode violently."
             )
 
+from evennia import CmdSet
+from evennia import default_cmds
+
+class MechCmdSet(CmdSet):
+    """
+    This allows mechs to do things.
+    """
+
+    key = "mechcmdset"
+
+    def at_cmdset_creation(self):
+        "Called once, when cmdset is first created"
+        self.add(CmdFire())
+        self.add(CmdLaunch())
