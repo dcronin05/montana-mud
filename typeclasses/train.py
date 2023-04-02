@@ -1,6 +1,6 @@
 from evennia import DefaultObject, search_object
-
 from commands.train import TrainCmdSet
+from typeclasses.trainscript import TrainStoppedScript
 
 
 class Train(DefaultObject):
@@ -13,6 +13,8 @@ class Train(DefaultObject):
         self.db.driving = False
         self.db.direction = 1
         self.db.rooms = ['#77', '#81', '#84', '#87', '#93']
+
+        self.scripts.add(TrainStoppedScript)
 
     def start_driving(self):
         self.db.driving = True
@@ -32,4 +34,4 @@ class Train(DefaultObject):
             roomref = self.db.rooms[idx]
             room = search_object(roomref)[0]
             self.move_to(room)
-            self.msg_contents(f'The train is moving forward to {room.name}.')
+            self.msg_contents(f'The train chugs forward along the track toward {room.name}.')
