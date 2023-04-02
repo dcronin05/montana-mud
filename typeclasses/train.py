@@ -3,7 +3,7 @@ from evennia import DefaultObject, search_object
 from commands.train import TrainCmdSet
 
 
-class Train(Object):
+class Train(DefaultObject):
 
     def at_object_creation(self):
 
